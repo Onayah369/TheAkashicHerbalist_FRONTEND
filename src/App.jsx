@@ -4,12 +4,13 @@ import { getHerbs } from './services/herbService';
 function App() {
   const [herbs, setHerbs] = useState([]);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchHerbs = async () => {
       try {
-        const data = await getHerbs(search);
+        const data = await getHerbs(search, sort);
         setHerbs(data);
       } catch (error) {
         setError(error.message);
@@ -17,7 +18,7 @@ function App() {
     };
 
     fetchHerbs();
-  }, [search]);
+  }, [search, sort]);
 
   return (
     <main>
@@ -37,6 +38,19 @@ function App() {
             onChange={(event) => setSearch(event.target.value)}
           />
         </div>
+
+        <div>
+          <label htmlFor="sort">Sort by:</label>
+          <select
+            id="sort"
+            value={sort}
+            onChange={(event) => setSort(event.target.value)}
+          >
+            <option value="">Default</option>
+            <option value="name">A-Z</option>
+          </select>
+        </div>
+
 
         {error && <p>{error}</p>}
 

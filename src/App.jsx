@@ -1,5 +1,8 @@
 import {  useEffect, useState } from 'react'
 import { getHerbs } from './services/herbService';
+import Register from "./components/Register";
+import Login from "./components/Login";
+import { useAuth } from "./context/authContext";
 
 function App() {
   const [herbs, setHerbs] = useState([]);
@@ -9,6 +12,8 @@ function App() {
   const [continent, setContinent] = useState("");
   const [selectedHerb, setSelectedHerb] = useState(null);
   const [error, setError] = useState("");
+
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const fetchHerbs = async () => {
@@ -44,7 +49,7 @@ function App() {
         .filter(Boolean) || []
       ),
     ];
-
+    
     return (
       <main>
         <button onClick={() => setSelectedHerb(null)}>
@@ -106,6 +111,18 @@ function App() {
 
   return (
     <main>
+      {user ? (
+        <div>
+          <p>Welcome, {user.username}!</p>
+          <button onClick={logout}>Logout</button>
+        </div>
+      ) : (
+        <>
+          <Register/>
+          <Login/>
+        </>
+      )}
+
       <header>
         <h1>The Akashic Herbalist</h1>
         <p>Explore the traditional knowledge of herbs.</p>
@@ -152,7 +169,7 @@ function App() {
             <option value="Liver & Gallbladder">Liver & Gallbladder</option>
             <option value="Musculoskeletal">Musculoskeletal</option>
             <option value="Nervous System">Nervous System</option>
-            <option value="Reproduction">Reproduction</option>
+            <option value="Reproductive">Reproductive</option>
             <option value="Respiratory">Respiratory</option>
             <option value="Skin">Skin</option>
             <option value="Urinary & Renal">Urinary & Renal</option>

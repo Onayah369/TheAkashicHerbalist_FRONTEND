@@ -6,6 +6,9 @@ const Profile = () => {
 
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
+    const [bio, setBio] = useState("");
+    const [profilePicture, setProfilePicture] = useState("");
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         const getProfile = async () => {
@@ -21,6 +24,8 @@ const Profile = () => {
                 }
 
                 setProfile(data.user);
+                setBio(data.user.bio || "");
+                setProfilePicture(data.user.profilePicture || "");
             } catch (error) {
                 setError(error.message);
             }
@@ -30,6 +35,38 @@ const Profile = () => {
             getProfile();
         }
     }, [token]);
+
+    const handleUpdate = async (event) => {
+        event.preventDefault();
+
+        setMessage("");
+        setError("");
+
+        try {
+            const response = await fetch("http://localhost:8888/api/auth/me", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    bio,
+                    profilePicture,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to update profile");
+            }
+
+            setProfile(data.user);
+            setMessage(data.message);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
     if (error) {
         return <p>{error}</p>;
@@ -46,6 +83,25 @@ const Profile = () => {
             <p>Username: {profile.username}</p>
             <p>Email: {profile.email}</p>
             <p>Bio: {profile.bio || "No bio yet."}</p>
+
+            <form onSubmit={handleUpdate}>
+                <input
+                    type="text"
+                    placeholder="Profile picture URL"
+                    value={profilePicture}
+                    onChange={(event) => setProfilePicture(event.target.value)}
+                />
+
+                <textarea
+                    placeholder="Tell us about yourself"
+                    value={bio}
+                    onChange={(event) => setBio(event.target.value)}
+                />
+
+                <button type="submit">Save Profile</button>
+            </form>
+
+            {message && <p>{message}</p>}
         </section>
     );
 };

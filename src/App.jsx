@@ -3,6 +3,7 @@ import { getHerbs } from './services/herbService';
 import Register from "./components/Register";
 import Login from "./components/Login";
 import { useAuth } from "./context/authContext";
+import Profile from './components/Profile';
 
 function App() {
   const [herbs, setHerbs] = useState([]);
@@ -115,6 +116,9 @@ function App() {
         <div>
           <p>Welcome, {user.username}!</p>
           <button onClick={logout}>Logout</button>
+
+          <Profile/>
+
         </div>
       ) : (
         <>

@@ -642,6 +642,13 @@ padding: 0 16px;
     line-height: 1.4;
 }
 
+.auth-success {
+    margin: -4px 0 0;
+    color: #496A52;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
 .auth-switch {
     margin: 24px 0 0;
     text-align: center;

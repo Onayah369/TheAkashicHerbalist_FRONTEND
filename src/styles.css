@@ -674,3 +674,233 @@ padding: 0 16px;
         padding: 28px 24px 32px;
     }
 }
+
+/* Favorites Page */
+
+.favorites-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+    background: #F5F1E8;
+}
+
+.favorites-container {
+    width: min(1050px, 100%);
+    margin: 0 auto;
+}
+
+.favorites-back-button {
+    background: transparent;
+    color: #496A52;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.favorites-back-button:hover {
+    background: transparent;
+    color: #263A2B;
+    transform: none;
+    box-shadow: none;
+}
+
+.favorites-heading {
+    margin: 32px 0 32px;
+    text-align: center;
+}
+
+.favorites-eyebrow {
+    margin: 0 0 8px;
+    color: #687268;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.favorites-heading h1 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.favorites-heading > p:last-child {
+    margin: 0;
+    color: #687268;
+    font-size: 13px;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.favorite-herb-card {
+    overflow: hidden;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-herb-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(38, 58, 43, 0.09);
+}
+
+.favorite-herb-image {
+    height: 210px;
+    overflow: hidden;
+    background: #E3EBDD;
+}
+
+.favorite-herb-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-no-image {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: #687268;
+    font-size: 11px;
+}
+
+.favorite-herb-content {
+    padding: 20px;
+}
+
+.favorite-herb-eyebrow {
+    margin: 0 0 6px;
+    color: #8FAF91;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.favorite-herb-content h2 {
+    margin: 0 0 5px;
+    color: #263A2B;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.favorite-scientific-name {
+    margin: 0 0 7px;
+    color: #687268;
+    font-size: 12px;
+}
+
+.favorite-family {
+    margin: 0 0 18px;
+    color: #687268;
+    font-size: 11px;
+}
+
+.favorite-remove-button {
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    color: #496A52;
+    border: 1px solid #B9C9B8;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.favorite-remove-button:hover {
+    background: #E3EBDD;
+    color: #263A2B;
+    transform: none;
+    box-shadow: none;
+}
+
+.favorites-empty {
+    max-width: 520px;
+    margin: 40px auto 0;
+    padding: 45px 30px;
+    text-align: center;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.favorites-empty-icon {
+    margin-bottom: 12px;
+    color: #496A52;
+    font-size: 38px;
+    line-height: 1;
+}
+
+.favorites-empty h2 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.favorites-empty p {
+    max-width: 360px;
+    margin: 0 auto 22px;
+    color: #687268;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.favorites-primary-button {
+    padding: 11px 20px;
+    background: #263A2B;
+    color: #FFFFFF;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.favorites-primary-button:hover {
+    background: #496A52;
+}
+
+.favorites-error {
+    margin: 0 0 20px;
+    color: #B91C1C;
+    text-align: center;
+    font-size: 11px;
+}
+
+.favorites-status {
+    padding-top: 80px;
+    color: #687268;
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+    .favorites-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .favorites-page {
+        padding: 30px 16px 50px;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .favorite-herb-image {
+        height: 230px;
+    }
+
+    .favorites-empty {
+        padding: 35px 24px;
+    }
+}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Favorites from "./pages/Favorites";
@@ -9,7 +9,6 @@ import Register from "./pages/Register";
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/profile" element={<Profile />} />
         <Route path="/favorites" element={<Favorites />} />
@@ -20,7 +19,6 @@ function App() {
         <Route path="/" element={<Home />} />
 
       </Routes>
-    </BrowserRouter>
   );
 }
 

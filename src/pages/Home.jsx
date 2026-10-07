@@ -13,6 +13,7 @@ function Home() {
     const [selectedHerb, setSelectedHerb] = useState(null);
     const [error, setError] = useState("");
     const [favoriteIds, setFavoriteIds] = useState([]);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const { token } = useAuth();
 
@@ -175,142 +176,219 @@ function Home() {
     }
 
     return (
-        <main>
+        <main className='page home-page'>
 
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/favorites">Favorites</Link>
-                <Link to="/collections">Collections</Link>
-                <Link to="/journal">Journal</Link>
-                <Link to="/profile">Profile</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Create Account</Link>
-            </nav>
-            <header>
-                <h1>The Akashic Herbalist</h1>
-                <p>Explore the traditional knowledge of herbs.</p>
+            <header className='page-header'>
+                <div className='brand'>
+                    <span className='brand-icon'>H</span>
+                    <span className='brand-name'>The Akashic Herbalist</span>
+                </div>
+
+                <nav className='nav'>
+                    <Link to="/">Browse</Link>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register" className='nav-button'>Create Account</Link>
+
+                    <button
+                        className="menu-button"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Open navigation menu"
+                    >
+                        ☰
+                    </button>
+
+                    {menuOpen && (
+                        <div className='menu-dropdown'>
+                            <Link 
+                                to="/favorites"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Favorites
+                            </Link>
+                            <Link 
+                                to="/collections"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Collections
+                            </Link>
+                            <Link 
+                                to="/journal"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Journal
+                            </Link>
+                            <Link 
+                                to="/profile"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Profile
+                            </Link>
+                        </div>
+                    )}
+                </nav>
             </header>
 
-            <section>
-                <h2>Explore Herbs</h2>
+            <div className='home-hero'>
+                <p className='hero-eyebrow'>TRADITIONAL HERBAL KNOWLEDGE</p>
+                <h1>The Akashic Herbalist</h1>
+                <p>Explore the traditional knowledge of herbs.</p>
+            </div>
 
-                <div>
-                <input
-                    type="text"
-                    placeholder="Search herbs..."
-                    value={search}
-                    onChange={(event) => setSearch(event.target.value)}
-                />
-                </div>
+            <section className='herb-explorer'>
+                <div className='explorer-heading'>
 
-                <div>
-                <label htmlFor="sort">Sort by:</label>
-                <select
-                    id="sort"
-                    value={sort}
-                    onChange={(event) => setSort(event.target.value)}
-                >
-                    <option value="">Default</option>
-                    <option value="name">A-Z</option>
-                </select>
-                </div>
-
-                <div>
-                <label htmlFor="usage">Usage:</label>
-
-                <select
-                    id="usage"
-                    value={usage}
-                    onChange={(event) => setUsage(event.target.value)}
-                >
-                    <option value="">All Uses</option>
-                    <option value="Cardiovascular">Cardiovascular</option>
-                    <option value="Digestive">Digestive</option>
-                    <option value="Eye & Ear">Eye & Ear</option>
-                    <option value="General Wellness">General Wellness</option>
-                    <option value="Immune & Infectious">Immune & Infectious</option>
-                    <option value="Liver & Gallbladder">Liver & Gallbladder</option>
-                    <option value="Musculoskeletal">Musculoskeletal</option>
-                    <option value="Nervous System">Nervous System</option>
-                    <option value="Reproductive">Reproductive</option>
-                    <option value="Respiratory">Respiratory</option>
-                    <option value="Skin">Skin</option>
-                    <option value="Urinary & Renal">Urinary & Renal</option>
-                </select>
-                </div>
-
-                <div>
-                <label htmlFor="continent">Continent:</label>
-
-                <select
-                    id="continent"
-                    value={continent}
-                    onChange={(event) => setContinent(event.target.value)}
-                >
-                    <option value="">All Continents</option>
-                    <option value="Africa">Africa</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="North America">North America</option>
-                    <option value="South America">South America</option>
-                    <option value="Oceania">Oceania</option>
-                </select>
-                </div>
-
-
-                {error && <p>{error}</p>}
-                <p>
-                Showing {herbs.length} {herbs.length === 1 ? "herb" : "herbs"}
-                </p>
-
-                <div>
-                {herbs.map((herb) => (
-                    <article 
-                    key={herb._id}
-                    onClick={() => setSelectedHerb(herb)}
-                    style={{ cursor: "pointer" }}
-                    >
-                    <img
-                        src={herb.image}
-                        alt={herb.name}
-                        width="200"
-                    />
-                    <h3>{herb.name}</h3>
-                    <p>
-                        <em>{herb.scientificName}</em>
+                    <div>
+                        <p className='section-eyebrow'>DISCOVER</p>
+                        <h2>Explore Herbs</h2>
+                    </div>
+                    
+                    <p className='herb-count'>
+                        Showing {herbs.length} {herbs.length === 1 ? "herb" : "herbs"}
                     </p>
-                    {herb.family && <p>Family: {herb.family}</p>}
-
-                    {herb.continents?.length > 0 && (
-                        <p>
-                        Region: {herb.continents.join(", ")}
-                        </p>
-                    )}
-
-                    {herb.usageCategories?.length > 0 && (
-                        <p>
-                        Uses: {herb.usageCategories.join(", ")}
-                        </p>
-                    )}
-
-                    {token && (
-                        <button
-                            onClick={(event) => {
-                                event.stopPropagation();
-                                handleFavorite(herb._id);
-                            }}
-                        >
-                            {favoriteIds.includes(herb._id)
-                            ?"♥Remove from Favorites"
-                            :"♡ Add to Favorites"}
-                        </button>
-                    )}
-                    </article>
-                ))}
                 </div>
-            </section>
-        </main>
-    );
-}
 
+                <div className='herb-filters'>
+
+                    <div className='search-wrapper'>
+                        <label htmlFor='herb-search'>Search</label>
+                        <input
+                            type="text"
+                            placeholder="Search herbs..."
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
+                        />
+                    </div>
+
+                    <div className='filter-group'>
+                        <label htmlFor="sort">Sort by</label>
+                        <select
+                            id="sort"
+                            value={sort}
+                            onChange={(event) => setSort(event.target.value)}
+                        >
+                            <option value="">Default</option>
+                            <option value="name">A-Z</option>
+                        </select>
+                    </div>
+
+                    <div className='filter-group'>
+                        <label htmlFor="usage">Usage:</label>
+
+                        <select
+                            id="usage"
+                            value={usage}
+                            onChange={(event) => setUsage(event.target.value)}
+                        >
+                            <option value="">All Uses</option>
+                            <option value="Cardiovascular">Cardiovascular</option>
+                            <option value="Digestive">Digestive</option>
+                            <option value="Eye & Ear">Eye & Ear</option>
+                            <option value="General Wellness">General Wellness</option>
+                            <option value="Immune & Infectious">Immune & Infectious</option>
+                            <option value="Liver & Gallbladder">Liver & Gallbladder</option>
+                            <option value="Musculoskeletal">Musculoskeletal</option>
+                            <option value="Nervous System">Nervous System</option>
+                            <option value="Reproductive">Reproductive</option>
+                            <option value="Respiratory">Respiratory</option>
+                            <option value="Skin">Skin</option>
+                            <option value="Urinary & Renal">Urinary & Renal</option>
+                        </select>
+                    </div>
+
+                    <div className='filter-group'>
+                        <label htmlFor="continent">Continent:</label>
+
+                        <select
+                            id="continent"
+                            value={continent}
+                            onChange={(event) => setContinent(event.target.value)}
+                        >
+                            <option value="">All Continents</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="North America">North America</option>
+                            <option value="South America">South America</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+                    </div>
+                </div>
+
+                    {error && <p>{error}</p>}
+                    
+
+                    <div className='herb-grid'>
+                            {herbs.map((herb) => (
+                                <article
+                                    className='herb-card'
+                                    key={herb._id}
+                                    onClick={() => setSelectedHerb(herb)}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <div className='herb-image-wrapper'>
+                                        <img
+                                            src={herb.image}
+                                            alt={herb.name}
+                                            width="200"
+                                        />
+                                    </div>
+                                    <div className='herb-card-content'>
+                                        <div>
+                                            <h3>{herb.name}</h3>
+                                            <p className='scientific-name'>
+                                                <em>{herb.scientificName}</em>
+                                            </p>
+                                        </div>
+                                
+                                            {herb.family && (
+                                                <p className='herb-family'>Family: 
+                                                    {herb.family}
+                                                </p>
+                                            )}
+
+                                            {herb.continents?.length > 0 && (
+                                                <p className='herb-region'>
+                                                Region: {herb.continents.join(", ")}
+                                                </p>
+                                            )}
+
+                                            {herb.usageCategories?.length > 0 && (
+                                                <div className='herb-tags'>
+                                                    {herb.usageCategories.map((category) => (
+                                                        <span key={category}>
+                                                            {category}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {token && (
+                                                <button
+                                                className='favorite-button'
+                                                    onClick={(event) => {
+                                                        event.stopPropagation();
+                                                        handleFavorite(herb._id);
+                                                    }}
+                                                >
+                                                    {favoriteIds.includes(herb._id)
+                                                    ?"♥ Remove from Favorites"
+                                                    :"♡ Add to Favorites"}
+                                                </button>
+                                )}
+
+                            </div>
+
+                        </article>
+
+                    ))}
+                
+                </div>      
+            
+            </section>
+
+        </main>
+
+    );
+
+}
 export default Home;

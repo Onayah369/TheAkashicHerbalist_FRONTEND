@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import Navbar from "../components/Navbar";
 
 function Journal() {
     const { token } = useAuth();
@@ -64,8 +64,8 @@ function Journal() {
         setTitle("");
         setContent("");
         setSelectedHerb("");
-        setIsPublic("");
-        setEditingId("");
+        setIsPublic(false);
+        setEditingId(null);
     };
 
     const handleSubmit = async (event) => {
@@ -104,14 +104,14 @@ function Journal() {
             }
 
             if (editingId) {
-                setEntries(
-                    entries.map((entry) =>
+                setEntries((currentEntries) =>
+                    currentEntries.map((entry) =>
                         entry._id === editingId ? data.entry : entry
                     )
                 );
                 setMessage("Journal entry updated successfully.");
             } else {
-                setEntries([data.entry, ...entries]);
+                setEntries((currentEntries) => [data.entry, ...currentEntries]);
                 setMessage("Journal entry created successfully.");
             }
 
@@ -151,8 +151,8 @@ function Journal() {
                 );
             }
 
-            setEntries(
-                entries.filter((entry) => entry._id !== entryId)
+            setEntries((currentEntries) =>
+                currentEntries.filter((entry) => entry._id !== entryId)
             );
 
             setMessage("Journal entry deleted successfully.");
@@ -163,119 +163,215 @@ function Journal() {
 
     if (!token) {
         return (
-            <main>
-                <Link to="/">←  Back to Home</Link>
-                <h1>My Journal</h1>
-                <p>Please log in to view your journal.</p>
-            </main>
+            <>
+
+                <Navbar pageTitle="Journal" />
+                <main className="journal-page">
+                    <div className="journal-container">
+
+                    <div className="journal-empty">
+                        <h1>My Journal</h1>
+                        <p>Please log in to view your journal.</p>
+                    </div>
+                    </div>
+                </main>
+            </>
         );
     }
 
     return (
-        <main>
-            <Link to="/">←  Back to Home</Link>
-            <h1>My Journal</h1>
+        <>
 
-            <section>
-                <h2>
-                    {editingId ? "Edit Journal Entry" : "New Journal Entry"}
-                </h2>
+            <Navbar pageTitle="My Journal" />
+            <main className="journal-page">
+                <div className="journal-container">
+                    
+                    <header className="journal-heading">
+                        <p className="journal-eyebrow">YOUR HERBAL JOURNEY</p>
+                        <h1>My Journal</h1>
+                        <p>
+                            Reflect on the herbs, experiences, and discoveries that become part of your journey.
+                        </p>
+                    </header>
 
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Entry Title"
-                        value={title}
-                        onChange={(event) => setTitle(event.target.value)}
-                        required
-                    />
-
-                    <select
-                        value={selectedHerb}
-                        onChange={(event) =>
-                            setSelectedHerb(event.target.value)
-                        }
-                        required
-                    >
-                        <option value="">Select an herb</option>
-
-                        {herbs.map((herb) => (
-                            <option key={herb._id} value={herb._id}>
-                                {herb.name}
-                            </option>
-                        ))}
-                    </select>
-
-                    <textarea
-                        placeholder="Write your journal entry..."
-                        value={content}
-                        onChange={(event) =>
-                            setContent(event.target.value)
-                        }
-                        required
-                    />
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={isPublic}
-                            onChange={(event) =>
-                                setIsPublic(event.target.checked)
-                            }
-                        />
-                            Make this entry public
-                    </label>
-
-                    <button type="submit">
-                        {editingId ? "Update Entry" : "Create Entry"}
-                    </button>
-
-                    {editingId && (
-                        <button type="button" onClick={resetForm}>
-                            Cancel Edit
-                        </button>
-                    )}
-                </form>
-            </section>
-
-            {error && <p>{error}</p>}
-            {message && <p>{message}</p>}
-
-            <section>
-                <h2>Your Journal Entries</h2>
-
-                {entries.length === 0 ? (
-                    <p>You haven't created any journal entries yet.</p>
-                ) : (
-                    entries.map((entry) => (
-                        <article key={entry._id}>
-                            <h3>{entry.title}</h3>
-
-                            <p>
-                                Herb:{""}
-                                {entry.herb?.name || "Unknown herb"}
+                    <section className="journal-create-card">
+                        <div className="journal-section-heading">
+                            <p className="journal-eyebrow">
+                                {editingId ? "EDIT ENTRY" : "CREATE"}
                             </p>
-
-                            <p>{entry.content}</p>
-
+                            <h2>
+                                {editingId ? "Edit Journal Entry" : "New Journal Entry"}
+                            </h2>
                             <p>
-                                {entry.isPublic
-                                ? "Public"
-                                : "Private"}
+                                Record your thoughts, experiences, and herbal observations.
                             </p>
+                        </div>
 
-                            <button onClick={() => handleEdit(entry)}>
-                                    Edit
-                            </button> 
+                        <form
+                            className="journal-form"
+                            onSubmit={handleSubmit}>
+                                <div className="journal-form-group">
+                                    <label htmlFor="journal-title">
+                                        Entry Title
+                                    </label>
 
-                            <button onClick={() => handleDelete(entry._id)}>
-                                Delete
-                            </button> 
-                        </article>
-                    ))
-                )}
-            </section>
-        </main>
+                                    <input
+                                        id="journal-title"
+                                        type="text"
+                                        placeholder="e.g. My experience with lavender"
+                                        value={title}
+                                        onChange={(event) => setTitle(event.target.value)}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="journal-form-group">
+                                    <label htmlFor="journal-herb">
+                                        Herb
+                                    </label>
+                                    <select
+                                        value={selectedHerb}
+                                        onChange={(event) =>
+                                            setSelectedHerb(event.target.value)
+                                        }
+                                        required
+                                    >
+                                        <option value="">Select an herb</option>
+
+                                        {herbs.map((herb) => (
+                                            <option key={herb._id} value={herb._id}>
+                                                {herb.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="journal-form-group">
+                                    <label htmlFor="journal-content">
+                                        Your Entry
+                                    </label>
+
+                                    <textarea
+                                        placeholder="Write your journal entry..."
+                                        value={content}
+                                        onChange={(event) =>
+                                            setContent(event.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
+
+                            <label className="journal-public-toggle">
+                                <input
+                                    type="checkbox"
+                                    checked={isPublic}
+                                    onChange={(event) =>
+                                        setIsPublic(event.target.checked)
+                                    }
+                                />
+                                <span>
+                                    Make this entry public
+                                </span>
+                            </label>
+
+                            <div className="journal-form-actions">
+                                <button 
+                                    type="submit"
+                                    className="journal-primary-button"
+                                >
+                                {editingId ? "Update Entry" : "Create Entry"}
+                            </button>
+
+                            {editingId && (
+                                <button 
+                                    type="button" 
+                                    onClick={resetForm}
+                                    className="journal-cancel-button"
+                                >
+                                    Cancel Edit
+                                </button>
+                            )}
+                            </div>
+                        </form>
+                    </section>
+
+                    {error && <p className="journal-error">{error}</p>}
+                    {message && <p className="journal-success">{message}</p>}
+
+                    <section className="journal-list-section">
+                        <div className="journal-section-heading">
+                            <p className="journal-eyebrow">
+                                YOUR ENTRIES
+                            </p>
+                            <h2>Your Journal Entries</h2>
+                        </div>
+
+                        {entries.length === 0 ? (
+                            <div className="journal-grid">
+                                <h2>Your journal is waiting.</h2>
+                                <p>
+                                    Create your first entry to begin recording your herbal experiences and discoveries.
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="journal-grid">
+                                {entries.map((entry) => (
+                                    <article 
+                                        key={entry._id}
+                                        className="journal-entry-card"
+                                    >
+                                        <div className="journal-entry-header">
+                                            <div>
+                                                <p className="journal-entry-eyebrow">
+                                                    HERBAL JOURNAL
+                                                </p>
+                                                <h3>{entry.title}</h3>
+                                            </div>
+
+                                            <span 
+                                                className={entry.isPublic
+                                                                ? "journal-visibility public"
+                                                                : "journal-visibility private"
+                                                }
+                                            >
+                                                {entry.isPublic
+                                                    ? "Public"
+                                                    : "Private"}
+                                            </span>
+                                        </div>
+
+                                        <p className="journal-entry-herb">
+                                            <span>Herb:</span>{" "}
+                                            {entry.herb?.name || "Unknown herb"}
+                                        </p>
+
+                                        <p className="journal-entry-content">{entry.content}</p>
+
+                                        <div className="journal-entry-actions">
+                                            <button 
+                                                type="button"
+                                                className="journal-edit-button"
+                                                onClick={() => handleEdit(entry)}
+                                            >
+                                                Edit
+                                            </button> 
+
+                                            <button 
+                                                type="button"
+                                                className="journal-delete-button"
+                                                onClick={() => handleDelete(entry._id)}
+                                            >
+                                                Delete
+                                            </button> 
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </div>
+            </main>
+        </>
     );
 }
 

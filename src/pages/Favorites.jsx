@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 
 function Favorites() {
@@ -73,122 +74,129 @@ function Favorites() {
 
         if (!token) {
             return (
-                <main className="favorites-page">
-                    <section className="favorites-card favorites-empty">
-                        <p className="favorites-eyebrow">YOUR HERBAL COLLECTION</p>
-                        <h1>Login Required</h1>
-                        <p>
-                            Please log in to view your favorite herbs.
-                        </p>
+                <>
 
-                        <button 
-                            className="favorites-primary-button"
-                            onClick={() => navigate("/login")}
-                        >
-                            Login
-                        </button>
-                    </section>
-                </main>
+                    <Navbar pageTitle="My Favorites" />
+
+                    <main className="favorites-page">
+                        <section className="favorites-card favorites-empty">
+                            <p className="favorites-eyebrow">YOUR HERBAL COLLECTION</p>
+                            <h1>Login Required</h1>
+                            <p>
+                                Please log in to view your favorite herbs.
+                            </p>
+
+                            <button 
+                                className="favorites-primary-button"
+                                onClick={() => navigate("/login")}
+                            >
+                                Login
+                            </button>
+                        </section>
+                    </main>
+                </>
             );
         }
 
         if (loading) {
             return (
-                <main className="favorites-page">
-                    <p className="favorites-status">Loading favorites...</p>
-                </main>
+                <>
+                    <Navbar pageTitle="My Favorites" />
+
+                    <main className="favorites-page">
+                        <p className="favorites-status">Loading favorites...</p>
+                    </main>
+                </>
             );
         }
 
     return (
-        <main className="favorites-page">
-            <section className="favorites-container">
-                <button 
-                    type="button"
-                    className="favorites-back-button"
-                    onClick={() => navigate("/")}
-                >
-                    ← Back to Home
-                </button>
-                <header className="favorites-heading">
-                    <p className="favorites-eyebrow">
-                        YOUR HERBAL COLLECTION
-                    </p>
-                    <h1>My Favorites</h1>
-                    <p>
-                        Keep the herbs that speak to you close.
-                    </p>
-                </header>
-
-                {error && (
-                    <p className="favorites-error">{error}</p>
-                )}
-
-                {favorites.length === 0 ? (
-                    <section className="favorites-empty">
-                        <div className="favorites-empty-icon">♡</div>
-                        <h2>No favorites yet</h2>
-                        <p>
-                            Explore the herbal library and save the herbs you want to return to.
+        <>
+            <Navbar pageTitle="My Favorites" />
+            
+            <main className="favorites-page">
+                <section className="favorites-container">
+        
+                    <header className="favorites-heading">
+                        <p className="favorites-eyebrow">
+                            YOUR HERBAL COLLECTION
                         </p>
+                        <h1>My Favorites</h1>
+                        <p>
+                            Keep the herbs that speak to you close.
+                        </p>
+                    </header>
 
-                        <button
-                            className="favorites-primary-button"
-                            onClick={() => navigate("/")}
-                        >
-                            Explore Herbs
-                        </button>
-                    </section>
-                ) : (
-                    <div className="favorites-grid">
-                        {favorites.map((herb) => (
-                            <article 
-                                className="favorite-herb-card"
-                                key={herb._id}
+                    {error && (
+                        <p className="favorites-error">{error}</p>
+                    )}
+
+                    {favorites.length === 0 ? (
+                        <section className="favorites-empty">
+                            <div className="favorites-empty-icon">♡</div>
+                            <h2>No favorites yet</h2>
+                            <p>
+                                Explore the herbal library and save the herbs you want to return to.
+                            </p>
+
+                            <button
+                                className="favorites-primary-button"
+                                onClick={() => navigate("/")}
                             >
-                                <div className="favorite-herb-image">
-                                    {herb.image ? (
-                                        <img
-                                            src={herb.image}
-                                            alt={herb.name}
-                                        />
-                                    ) : (
-                                        <div className="favorite-no-image">
-                                            No Image
-                                        </div>
-                                    )}
-                                </div>
+                                Explore Herbs
+                            </button>
+                        </section>
+                    ) : (
+                        <div className="favorites-grid">
+                            {favorites.map((herb) => (
+                                <article 
+                                    className="favorite-herb-card"
+                                    key={herb._id}
+                                >
+                                    <div className="favorite-herb-image">
+                                        {herb.image ? (
+                                            <img
+                                                src={herb.image}
+                                                alt={herb.name}
+                                            />
+                                        ) : (
+                                            <div className="favorite-no-image">
+                                                No Image
+                                            </div>
+                                        )}
+                                    </div>
 
-                                <div className="favorite-herb-content">
-                                    <p className="favorite-herb-eyebrow">
-                                        HERB
-                                    </p>
-
-                                    <h2>{herb.name}</h2>
-
-                                    {herb.scientificName && (
-                                        <p className="favorite-scientific-name">
-                                            <em>{herb.scientificName}</em>
+                                    <div className="favorite-herb-content">
+                                        <p className="favorite-herb-eyebrow">
+                                            HERB
                                         </p>
-                                    )}
-                                    {herb.family && (
-                                        <p className="favorite-family">Family: {herb.family}</p>
-                                    )}
 
-                                    <button
-                                        type="button"
-                                        className="favorite-remove-button"
-                                        onClick={() => removeFavorite(herb._id)}
-                                    >
-                                        ♡ Remove Favorite
-                                    </button>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                )}
-            </section>
-        </main>
+                                        <h2>{herb.name}</h2>
+
+                                        {herb.scientificName && (
+                                            <p className="favorite-scientific-name">
+                                                <em>{herb.scientificName}</em>
+                                            </p>
+                                        )}
+                                        {herb.family && (
+                                            <p className="favorite-family">Family: {herb.family}</p>
+                                        )}
+
+                                        <button
+                                            type="button"
+                                            className="favorite-remove-button"
+                                            onClick={() => removeFavorite(herb._id)}
+                                        >
+                                            ♡ Remove Favorite
+                                        </button>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    )}
+                </section>
+            </main>
+        </>
     );
 }
 

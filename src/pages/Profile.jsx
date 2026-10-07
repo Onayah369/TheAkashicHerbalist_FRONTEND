@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -81,170 +82,173 @@ const Profile = () => {
 
     if (!token) {
         return (
-            <main className="profile-page">
-                <section className="profile-card">
-                    <p className="profile-eyebrow">MEMBERS ONLY</p>
-                    <h1>Login Required</h1>
-                    <p>
-                        Please log in to view and edit your profile.
-                    </p>
+            <>
 
-                    <button 
-                        className="profile-primary-button"
-                        onClick={() => navigate("/login")}
-                    >
-                        Login
-                    </button>
-                </section>
-            </main>
+                <Navbar pageTitle="Profile" />
+                <main className="profile-page">
+                    <section className="profile-card">
+                        <p className="profile-eyebrow">MEMBERS ONLY</p>
+                        <h1>Login Required</h1>
+                        <p>
+                            Please log in to view and edit your profile.
+                        </p>
+
+                        <button 
+                            className="profile-primary-button"
+                            onClick={() => navigate("/login")}
+                        >
+                            Login
+                        </button>
+                    </section>
+                </main>
+            </>
         );
     }
 
     if (loading) {
         return (
-            <main className="profile-page">
-                <p className="profile-status">Loading profile...</p>
-            </main>
+            <>
+
+                <Navbar pageTitle="Profile" />
+                <main className="profile-page">
+                    <p className="profile-status">Loading profile...</p>
+                </main>
+            </>
         );
     }
 
     if (error && !profile) {
         return (
-            <main className="profile-page">
-                <section className="profile-card">
-                    <p className="profile-error">{error}</p>
-                    <button 
-                        className="profile-primary-button"
-                        onClick={() => navigate("/")}
-                    >
-                        ←  Back to Home
-                    </button>
-                </section>
-            </main>
+            <>
+
+                <Navbar pageTitle="Profile" />
+                <main className="profile-page">
+                    <section className="profile-card">
+                        <p className="profile-error">{error}</p>
+                    </section>
+                </main>
+            </>
         );
     }
 
-    return (
-        <main className="profile-page">
-            <section className="profile-card">
-                <button 
-                    type="button"
-                    className="profile-back-button"
-                    onClick={() => navigate("/")}
-                >
-                    ← Back to Home
-                </button>
+        return (
+            <>
 
-                <div className="profile-heading">
-                    <p className="profile-eyebrow">YOUR HERBAL JOURNEY</p>
-                    <h2>My Profile</h2>
-                    <p>
-                        Manage your personal information and community presence.
-                    </p>
-                </div>
+                <Navbar pageTitle="My Profile" />
+                <main className="profile-page">
+                    <section className="profile-card">
 
-                <div className="profile-avatar">
-                    {profile.profilePicture ? (
-                        <img
-                            src={profile.profilePicture}
-                            alt={`${profile.username}'s profile`}
-                        />
-                    ) : (
-                        <span>
-                            {profile.username ?.charAt(0).toUpperCase()}
-                        </span>
-                    )}
-                </div>
-            
-            {!isEditing ? (
-                <div className="profile-details">
-                    <div className="profile-detail">
-                        <span>Username</span>
-                        <strong>{profile.username}</strong>
-                    </div>
-                    <div className="profile-detail">
-                        <span>Email</span>
-                        <strong>{profile.email}</strong>
-                    </div>
-                    <div className="profile-detail profile-bio">
-                        <span>Bio</span>
-                        <p>
-                            {profile.bio || "Don't be shy. Tell us a little about yourself."}
-                        </p>
-                    </div>
+                        <div className="profile-heading">
+                            <p className="profile-eyebrow">YOUR HERBAL JOURNEY</p>
+                            <h2>My Profile</h2>
+                            <p>
+                                Manage your personal information and community presence.
+                            </p>
+                        </div>
 
-                    <button 
-                        type="button"
-                        className="profile-primary-button"
-                        onClick={() => {
-                            setBio(profile.bio || "");
-                            setProfilePicture(profile.profilePicture || "");
-                            setMessage("");
-                            setIsEditing(true);
-                        }}
-                    >
-                        Edit Profile
-                    </button>
-                </div>
-            ) : (
-                <form 
-                    className="profile-form"
-                    onSubmit={handleUpdate}
-                >
-                    <div className="profile-form-group">
-                        <label htmlFor="profilePicture">
-                            Profile Picture URL
-                        </label>
-                        <input
-                            id="profilePicture"
-                            type="url"
-                            placeholder="Profile picture URL"
-                            value={profilePicture}
-                            onChange={(event) => setProfilePicture(event.target.value)}
-                        />
-                    </div>
-
-                    <div className="profile-form-group">
-                        <label htmlFor="bio">Bio</label>
-                        <textarea
-                        id="bio"
-                        placeholder="Tell us about yourself"
-                        value={bio}
-                        onChange={(event) => setBio(event.target.value)}
-                    />
-                    </div>
+                        <div className="profile-avatar">
+                            {profile.profilePicture ? (
+                                <img
+                                    src={profile.profilePicture}
+                                    alt={`${profile.username}'s profile`}
+                                />
+                            ) : (
+                                <span>
+                                    {profile.username ?.charAt(0).toUpperCase()}
+                                </span>
+                            )}
+                        </div>
                     
-                    {error && (
-                        <p className="profile-error">{error}</p>
+                    {!isEditing ? (
+                        <div className="profile-details">
+                            <div className="profile-detail">
+                                <span>Username</span>
+                                <strong>{profile.username}</strong>
+                            </div>
+                            <div className="profile-detail">
+                                <span>Email</span>
+                                <strong>{profile.email}</strong>
+                            </div>
+                            <div className="profile-detail profile-bio">
+                                <span>Bio</span>
+                                <p>
+                                    {profile.bio || "Don't be shy. Tell us a little about yourself."}
+                                </p>
+                            </div>
+
+                            <button 
+                                type="button"
+                                className="profile-primary-button"
+                                onClick={() => {
+                                    setBio(profile.bio || "");
+                                    setProfilePicture(profile.profilePicture || "");
+                                    setMessage("");
+                                    setIsEditing(true);
+                                }}
+                            >
+                                Edit Profile
+                            </button>
+                        </div>
+                    ) : (
+                        <form 
+                            className="profile-form"
+                            onSubmit={handleUpdate}
+                        >
+                            <div className="profile-form-group">
+                                <label htmlFor="profilePicture">
+                                    Profile Picture URL
+                                </label>
+                                <input
+                                    id="profilePicture"
+                                    type="url"
+                                    placeholder="Profile picture URL"
+                                    value={profilePicture}
+                                    onChange={(event) => setProfilePicture(event.target.value)}
+                                />
+                            </div>
+
+                            <div className="profile-form-group">
+                                <label htmlFor="bio">Bio</label>
+                                <textarea
+                                id="bio"
+                                placeholder="Tell us about yourself"
+                                value={bio}
+                                onChange={(event) => setBio(event.target.value)}
+                            />
+                            </div>
+                            
+                            {error && (
+                                <p className="profile-error">{error}</p>
+                            )}
+
+                            <div className="profile-actions">
+                                <button 
+                                    type="submit"
+                                    className="profile-primary-button"
+                                >
+                                    Save Profile
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="profile-secondary-button"
+                                    onClick={() => {
+                                        setBio(profile.bio || "");
+                                        setProfilePicture(profile.profilePicture || "");
+                                        setError("");
+                                        setIsEditing(false);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
                     )}
 
-                    <div className="profile-actions">
-                        <button 
-                            type="submit"
-                            className="profile-primary-button"
-                        >
-                            Save Profile
-                        </button>
-
-                        <button
-                            type="button"
-                            className="profile-secondary-button"
-                            onClick={() => {
-                                setBio(profile.bio || "");
-                                setProfilePicture(profile.profilePicture || "");
-                                setError("");
-                                setIsEditing(false);
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            )}
-
-                {message && <p className="profile-success">{message}</p>}
-            </section>
-        </main>
+                        {message && <p className="profile-success">{message}</p>}
+                    </section>
+                </main>
+        </>
     );
 };
 

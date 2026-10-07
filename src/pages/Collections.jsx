@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import Navbar from "../components/Navbar";
 
 function Collections() {
     const { token } = useAuth();
@@ -11,7 +12,7 @@ function Collections() {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const [herbs, setHerbs] = useState([]);
-    const [selectedHerb, setSelectedHerb] = useState("");
+    const [selectedHerbs, setSelectedHerbs] = useState("");
 
     useEffect(() => {
         const getCollections = async () => {
@@ -96,13 +97,15 @@ function Collections() {
     };
 
     const handleAddHerb = async (collectionId) => {
-        if (!selectedHerb) {
+        const herbId = selectedHerbs[collectionId];
+
+        if (!herbId) {
             return;
         }
 
         try {
             const response = await fetch(
-                `http://localhost:8888/api/collections/${collectionId}/herbs/${selectedHerb}`,
+                `http://localhost:8888/api/collections/${collectionId}/herbs/${herbId}`,
                 {
                     method: "POST",
                     headers: {
@@ -119,15 +122,18 @@ function Collections() {
                 );
             }
 
-            setCollections(
-                collections.map((collection) => 
+            setCollections((currentCollections) =>
+                currentCollections.map((collection) => 
                     collection._id === collectionId
                         ? data.collection
                         : collection
                 )
             );
 
-            setSelectedHerb("");
+            setSelectedHerbs({
+                ...selectedHerbs,
+                [collectionId]: "",
+            });
             setMessage("Herb added to collection.");
         } catch (error) {
             setError(error.message);
@@ -154,8 +160,8 @@ function Collections() {
                 );
             }
 
-            setCollections(
-                collections.map((collection) =>
+            setCollections((currentCollections) =>
+                currentCollections.map((collection) =>
                     collection._id === collectionId
                         ? data.collection
                         : collection
@@ -188,8 +194,8 @@ function Collections() {
                 );
             }
 
-            setCollections(
-                collections.filter(
+            setCollections((currentCollections) =>
+                currentCollections.filter(
                     (collection) => collection._id !== collectionId
                 )
             );
@@ -202,113 +208,208 @@ function Collections() {
 
     if (!token) {
         return (
-            <main>
-                <Link to="/">← Back to Home</Link>
-                <h1>Collections</h1>
-                <p>Please log in to view your collections.</p>
-            </main>
+            <>
+
+            <Navbar pageTitle="Collections" />
+                <main className="collections-page">
+                    <div className="collections-container">
+
+                        <div className="collections-empty">
+                            <p className="collections-eyebrow">YOUR HERBAL LIBRARY</p>
+                            <h1>Collections</h1>
+                            <p>Please log in to view your collections.</p>
+                        </div>
+                    </div>
+                </main>
+            </>
         );
     }
 
     return (
-        <main>
-            <Link to="/">← Back to Home</Link>
-            <h1>My Collections</h1>
+        <>
 
-            <section>
-                <h2>Create a Collection</h2>
+            <Navbar pageTitle="My Collections" />
+            <main className="collections-page">
+                <div className="collections-container">
 
-                <form onSubmit={handleCreateCollection}>
-                    <input
-                        type="text"
-                        placeholder="Collection name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        required
-                    />
-
-                    <textarea
-                        placeholder="Description"
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                    />
-
-                    <button type="submit">
-                        Create Collection
-                    </button>
-                </form>
-            </section>
-
-            {error && <p>{error}</p>}
-            {message && <p>{message}</p>}
-
-            <section>
-                <h2>Your Collections</h2>
-
-                {collections.length === 0 ? (
-                    <p>You haven't created any collections yet.</p>
-                ) : (
-                    collections.map((collection) => (
-                        <article key={collection._id}>
-                            <h3>{collection.name}</h3>
-
-                            {collection.description && (
-                                <p>{collection.description}</p>
-                            )}
-
+                    <header className="collections-heading">
+                        <p className="collections-eyebrow">YOUR HERBAL LIBRARY</p>
+                        <h1>My Collections</h1>
+                        <p>
+                            Organize the herbs that speak to your journey.
+                        </p>
+                    </header>
+                    <section className="collection-create-card">
+                        <div className="collection-section-heading">
+                            <p className="collections-eyebrow">CREATE</p>
+                            <h2>Create a Collection</h2>
                             <p>
-                                {collection.herbs?.length || 0} herbs
+                                Give your collection a name and a little meaning.
                             </p>
+                        </div>
 
-                            <select 
-                                value={selectedHerb}
-                                onChange={(event) => setSelectedHerb(event.target.value)}
-                            >
-                                <option value="">Select a herb</option>
+                        <form 
+                            className="collection-form"
+                            onSubmit={handleCreateCollection}
+                        >
+                            <div className="collection-form-group">
+                                <label htmlFor="collection-name">
+                                    Collection Name
+                                </label>
 
-                                {herbs.map((herb) => (
-                                    <option key={herb._id} value={herb._id}>
-                                        {herb.name}
-                                    </option>
-                                ))}
-                            </select>
+                                <input
+                                    id="collection-name"
+                                    type="text"
+                                    placeholder="e.g. Evening Herbs"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="collection-form-group">
+                                <label htmlFor="collection-description">
+                                    Description
+                                </label>
+                                <textarea
+                                    id="collection-description"
+                                    placeholder="What is this collection about?"
+                                    value={description}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                />
+                            </div>
 
                             <button 
-                                onClick={() => handleAddHerb(collection._id)}
+                                type="submit"
+                                className="collection-primary-button"
                             >
-                                Add Herb
+                                Create Collection
                             </button>
+                        </form>
+                    </section>
 
-                            {collection.herbs?.length > 0 && (
-                                <ul>
-                                    {collection.herbs.map((herb) => (
-                                        <li key={herb._id}>
-                                            {herb.name}
+                    {error && <p className="collections-error">{error}</p>}
+                    {message && <p className="collections-success">{message}</p>}
 
-                                            <button
-                                                onClick={() => 
-                                                    handleRemoveHerb(collection._id, herb._id)}
-                                            >
-                                                Remove
-                                            </button>                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                    <section className="collections-list-section">
+                        <div className="collection-section-heading">
+                            <p className="collections-eyebrow">YOUR COLLECTIONS</p>
+                            <h2>Your Collections</h2>
+                        </div>
 
-                            <button
-                                onClick={() =>
-                                    handleDeleteCollection(
-                                        collection._id
-                                    )
-                                }
-                            >
-                                Delete Collection
-                            </button>
-                        </article>
-                    ))
-                )}
-            </section>
-        </main>
+                        {collections.length === 0 ? (
+                            <div className="collections-empty">
+                                <div className="collections-empty-icon">✦</div>
+                                <h2>Your library is waiting.</h2>
+                                <p>
+                                    Create your first collection to begin organizing your favorite herbs.
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="collections-grid">
+                                {collections.map((collection) => (
+                                    <article
+                                        className="collection-card"
+                                        key={collection._id}
+                                    >
+                                        <div className="collection-card-header">
+                                            <div>
+                                                <p className="collection-card-eyebrow">
+                                                    HERBAL COLLECTION
+                                                </p>
+                                                <h3>{collection.name}</h3>
+                                            </div>
+
+                                            <span className="collection-count">
+                                                {collection.herbs?.length || 0}
+                                            </span>
+                                        </div>
+
+                                        {collection.description && (
+                                            <p className="collection-description">
+                                                {collection.description}
+                                            </p>
+                                        )}
+
+                                        <div className="collection-herb-form">
+                                            <label>
+                                                Add an herb
+                                            </label>
+
+                                            <div className="collection-herb-controls">
+                                                <select 
+                                                    value={selectedHerbs[collection._id] || ""}
+                                                    onChange={(event) => 
+                                                        setSelectedHerbs({
+                                                            ...selectedHerbs,
+                                                            [collection._id]: event.target.value,
+                                                        })
+                                                    }
+                                                >
+                                                    <option value="">Select an herb</option>
+
+                                                    {herbs.map((herb) => (
+                                                        <option key={herb._id} value={herb._id}>
+                                                            {herb.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+
+                                                <button
+                                                    type="button"
+                                                    className="collection-add-button"
+                                                    onClick={() => handleAddHerb(collection._id)}
+                                                >
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {collection.herbs?.length > 0 && (
+                                            <div className="collection-herbs">
+                                                <p className="collection-herbs-title">
+                                                    Herbs in this collection
+                                                </p>
+                                                <ul>
+                                                    {collection.herbs.map((herb) => (
+                                                        <li key={herb._id}>
+                                                            <span>
+                                                                {herb.name}
+                                                            </span>
+
+                                                            <button
+                                                                type="button"
+                                                                className="collection-remove-button"
+                                                                onClick={() => 
+                                                                    handleRemoveHerb(collection._id, herb._id)}
+                                                            >
+                                                                Remove
+                                                            </button>                                        
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        <button
+                                            type="button"
+                                            className="collection-delete-button"
+                                            onClick={() =>
+                                                handleDeleteCollection(
+                                                    collection._id
+                                                )
+                                            }
+                                        >
+                                            Delete Collection
+                                        </button>
+                                    </article>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </div>
+            </main>
+        </>
     );
 }
 

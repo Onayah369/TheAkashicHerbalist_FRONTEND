@@ -2,6 +2,7 @@ import {  useEffect, useState } from 'react'
 import { getHerbs } from '../services/herbService';
 import { useAuth } from "../context/authContext";
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 
 function Home() {
@@ -178,55 +179,7 @@ function Home() {
     return (
         <main className='page home-page'>
 
-            <header className='page-header'>
-                <div className='brand'>
-                    <span className='brand-icon'>H</span>
-                    <span className='brand-name'>The Akashic Herbalist</span>
-                </div>
-
-                <nav className='nav'>
-                    <Link to="/">Browse</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register" className='nav-button'>Create Account</Link>
-
-                    <button
-                        className="menu-button"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label="Open navigation menu"
-                    >
-                        ☰
-                    </button>
-
-                    {menuOpen && (
-                        <div className='menu-dropdown'>
-                            <Link 
-                                to="/favorites"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Favorites
-                            </Link>
-                            <Link 
-                                to="/collections"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Collections
-                            </Link>
-                            <Link 
-                                to="/journal"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Journal
-                            </Link>
-                            <Link 
-                                to="/profile"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Profile
-                            </Link>
-                        </div>
-                    )}
-                </nav>
-            </header>
+            <Navbar />
 
             <div className='home-hero'>
                 <p className='hero-eyebrow'>TRADITIONAL HERBAL KNOWLEDGE</p>

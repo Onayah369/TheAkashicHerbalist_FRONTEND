@@ -908,3 +908,927 @@ padding: 0 16px;
         padding: 35px 24px;
     }
 }
+
+/* Collections Page */
+
+.collections-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+    background: #F5F1E8;
+}
+
+.collections-container {
+    width: min(1050px, 100%);
+    margin: 0 auto;
+}
+
+.collections-back-button {
+    display: inline-block;
+    color: #496A52;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.collections-back-button:hover {
+    color: #263A2B;
+    text-decoration: none;
+}
+
+.collections-heading {
+    margin: 32px 0 34px;
+    text-align: center;
+}
+
+.collections-eyebrow {
+    margin: 0 0 8px;
+    color: #687268;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.collections-heading h1 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.collections-heading > p:last-child {
+    margin: 0;
+    color: #687268;
+    font-size: 13px;
+}
+
+/* Create Collection */
+
+.collection-create-card {
+    width: min(680px, 100%);
+    margin: 0 auto 45px;
+    padding: 28px 30px 32px;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.collection-section-heading {
+    margin-bottom: 22px;
+}
+
+.collection-section-heading h2 {
+    margin: 0 0 6px;
+    color: #263A2B;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.collection-section-heading > p:last-child {
+    margin: 0;
+    color: #687268;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.collection-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.collection-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.collection-form-group label {
+    color: #496A52;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.collection-form-group input,
+.collection-form-group textarea {
+    width: 100%;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    background: #F5F1E8;
+    color: #263A2B;
+    font-size: 12px;
+}
+
+.collection-form-group input {
+    height: 42px;
+    padding: 10px 12px;
+}
+
+.collection-form-group textarea {
+    min-height: 100px;
+    padding: 10px 12px;
+    line-height: 1.5;
+}
+
+.collection-form-group input:focus,
+.collection-form-group textarea:focus {
+    outline: 2px solid #8FAF91;
+    outline-offset: 1px;
+    border-color: #8FAF91;
+}
+
+.collection-primary-button {
+    margin-top: 3px;
+    padding: 11px 18px;
+    background: #263A2B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.collection-primary-button:hover {
+    background: #496A52;
+    opacity: 1;
+}
+
+/* Messages */
+
+.collections-error {
+    margin: 0 auto 18px;
+    color: #B91C1C;
+    text-align: center;
+    font-size: 11px;
+}
+
+.collections-success {
+    margin: 0 auto 18px;
+    color: #496A52;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Collections Grid */
+
+.collections-list-section {
+    margin-top: 10px;
+}
+
+.collections-list-section > .collection-section-heading {
+    margin-bottom: 22px;
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.collection-card {
+    padding: 24px;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.collection-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.collection-card-eyebrow {
+    margin: 0 0 5px;
+    color: #8FAF91;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.collection-card h3 {
+    margin: 0;
+    color: #263A2B;
+    font-size: 19px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.collection-count {
+    min-width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #E3EBDD;
+    color: #496A52;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.collection-description {
+    margin: 0 0 20px;
+    color: #687268;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Add Herb */
+
+.collection-herb-form {
+    padding-top: 18px;
+    border-top: 1px solid #D8DED2;
+}
+
+.collection-herb-form > label {
+    display: block;
+    margin-bottom: 7px;
+    color: #496A52;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.collection-herb-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.collection-herb-controls select {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    padding: 8px 10px;
+    background: #F5F1E8;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    color: #263A2B;
+    font-size: 11px;
+}
+
+.collection-add-button {
+    flex-shrink: 0;
+    padding: 9px 15px;
+    background: #496A52;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.collection-add-button:hover {
+    background: #263A2B;
+    opacity: 1;
+}
+
+/* Herbs Inside Collection */
+
+.collection-herbs {
+    margin-top: 20px;
+}
+
+.collection-herbs-title {
+    margin: 0 0 9px;
+    color: #687268;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.collection-herbs ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.collection-herbs li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #E3EBDD;
+    color: #263A2B;
+    font-size: 12px;
+}
+
+.collection-herbs li:last-child {
+    border-bottom: none;
+}
+
+.collection-remove-button {
+    flex-shrink: 0;
+    padding: 5px 9px;
+    background: transparent;
+    color: #687268;
+    border: 1px solid #D8DED2;
+    border-radius: 5px;
+    font-size: 9px;
+    box-shadow: none;
+}
+
+.collection-remove-button:hover {
+    background: #E3EBDD;
+    color: #263A2B;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Delete */
+
+.collection-delete-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 9px 12px;
+    background: transparent;
+    color: #687268;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    font-size: 10px;
+    box-shadow: none;
+}
+
+.collection-delete-button:hover {
+    background: #F5F1E8;
+    color: #B91C1C;
+    border-color: #D9B8B8;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Empty State */
+
+.collections-empty {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 42px 30px;
+    text-align: center;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.collections-empty-icon {
+    margin-bottom: 12px;
+    color: #496A52;
+    font-size: 32px;
+}
+
+.collections-empty h2 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.collections-empty p {
+    margin: 0;
+    color: #687268;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+
+@media (max-width: 750px) {
+    .collections-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .collections-page {
+        padding: 30px 16px 50px;
+    }
+
+    .collection-create-card {
+        padding: 24px 20px 26px;
+    }
+
+    .collection-card {
+        padding: 20px;
+    }
+
+    .collection-herb-controls {
+        flex-direction: column;
+    }
+
+    .collection-add-button {
+        width: 100%;
+    }
+}
+
+/* Journal Page */
+
+.journal-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+    background: #F5F1E8;
+}
+
+.journal-container {
+    width: min(1050px, 100%);
+    margin: 0 auto;
+}
+
+.journal-back-button {
+    display: inline-block;
+    color: #496A52;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.journal-back-button:hover {
+    color: #263A2B;
+    text-decoration: none;
+}
+
+.journal-heading {
+    margin: 32px 0 34px;
+    text-align: center;
+}
+
+.journal-eyebrow {
+    margin: 0 0 8px;
+    color: #687268;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.journal-heading h1 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.journal-heading > p:last-child {
+    max-width: 500px;
+    margin: 0 auto;
+    color: #687268;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Create Journal Entry */
+
+.journal-create-card {
+    width: min(680px, 100%);
+    margin: 0 auto 45px;
+    padding: 28px 30px 32px;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.journal-section-heading {
+    margin-bottom: 22px;
+}
+
+.journal-section-heading h2 {
+    margin: 0 0 6px;
+    color: #263A2B;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.journal-section-heading > p:last-child {
+    margin: 0;
+    color: #687268;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.journal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.journal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.journal-form-group label {
+    color: #496A52;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.journal-form-group input,
+.journal-form-group select,
+.journal-form-group textarea {
+    width: 100%;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    background: #F5F1E8;
+    color: #263A2B;
+    font-size: 12px;
+}
+
+.journal-form-group input,
+.journal-form-group select {
+    height: 42px;
+    padding: 10px 12px;
+}
+
+.journal-form-group textarea {
+    min-height: 150px;
+    padding: 10px 12px;
+    line-height: 1.6;
+}
+
+.journal-form-group input::placeholder,
+.journal-form-group textarea::placeholder {
+    color: #8A918A;
+}
+
+.journal-form-group input:focus,
+.journal-form-group select:focus,
+.journal-form-group textarea:focus {
+    outline: 2px solid #8FAF91;
+    outline-offset: 1px;
+    border-color: #8FAF91;
+}
+
+/* Public / Private Toggle */
+
+.journal-public-toggle {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #687268;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.journal-public-toggle input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #496A52;
+}
+
+/* Form Buttons */
+
+.journal-form-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 3px;
+}
+
+.journal-primary-button {
+    padding: 11px 18px;
+    background: #263A2B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.journal-primary-button:hover {
+    background: #496A52;
+    opacity: 1;
+}
+
+.journal-cancel-button {
+    padding: 11px 18px;
+    background: transparent;
+    color: #687268;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.journal-cancel-button:hover {
+    background: #F5F1E8;
+    color: #263A2B;
+    opacity: 1;
+    box-shadow: none;
+}
+
+/* Messages */
+
+.journal-error {
+    margin: 0 auto 18px;
+    color: #B91C1C;
+    text-align: center;
+    font-size: 11px;
+}
+
+.journal-success {
+    margin: 0 auto 18px;
+    color: #496A52;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Journal Entries */
+
+.journal-list-section {
+    margin-top: 10px;
+}
+
+.journal-list-section > .journal-section-heading {
+    margin-bottom: 22px;
+}
+
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.journal-entry-card {
+    padding: 24px;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.journal-entry-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 14px;
+}
+
+.journal-entry-eyebrow {
+    margin: 0 0 5px;
+    color: #8FAF91;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.journal-entry-card h3 {
+    margin: 0;
+    color: #263A2B;
+    font-size: 19px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.journal-visibility {
+    flex-shrink: 0;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.journal-visibility.public {
+    background: #E3EBDD;
+    color: #496A52;
+}
+
+.journal-visibility.private {
+    background: #F5F1E8;
+    color: #687268;
+    border: 1px solid #D8DED2;
+}
+
+.journal-entry-herb {
+    margin: 0 0 16px;
+    color: #687268;
+    font-size: 11px;
+}
+
+.journal-entry-herb span {
+    color: #496A52;
+    font-weight: 700;
+}
+
+.journal-entry-content {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid #E3EBDD;
+    color: #263A2B;
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.journal-entry-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.journal-edit-button {
+    flex: 1;
+    padding: 9px 12px;
+    background: #E3EBDD;
+    color: #496A52;
+    border: none;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.journal-edit-button:hover {
+    background: #D8E3D5;
+    color: #263A2B;
+    opacity: 1;
+    box-shadow: none;
+}
+
+.journal-delete-button {
+    flex: 1;
+    padding: 9px 12px;
+    background: transparent;
+    color: #687268;
+    border: 1px solid #D8DED2;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.journal-delete-button:hover {
+    background: #F5F1E8;
+    color: #B91C1C;
+    border-color: #D9B8B8;
+    opacity: 1;
+    box-shadow: none;
+}
+
+/* Empty State */
+
+.journal-empty {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 42px 30px;
+    text-align: center;
+    background: #FFFDF8;
+    border: 1px solid #D8DED2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(38, 58, 43, 0.06);
+}
+
+.journal-empty-icon {
+    margin-bottom: 12px;
+    color: #496A52;
+    font-size: 32px;
+}
+
+.journal-empty h1 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.journal-empty h2 {
+    margin: 0 0 8px;
+    color: #263A2B;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.journal-empty p {
+    margin: 0;
+    color: #687268;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+
+@media (max-width: 750px) {
+    .journal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .journal-page {
+        padding: 30px 16px 50px;
+    }
+
+    .journal-create-card {
+        padding: 24px 20px 26px;
+    }
+
+    .journal-entry-card {
+        padding: 20px;
+    }
+
+    .journal-form-actions {
+        flex-direction: column;
+    }
+
+    .journal-primary-button,
+    .journal-cancel-button {
+        width: 100%;
+    }
+
+    .journal-entry-header {
+        flex-direction: column;
+    }
+
+    .journal-visibility {
+        align-self: flex-start;
+    }
+}
+
+/* Navbar */
+
+.nav-profile {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #E3EBDD;
+    color: #496A52;
+    border: 1px solid #D8DED2;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-profile:hover {
+    border-color: #8FAF91;
+    text-decoration: none;
+}
+
+.nav-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-logout {
+    width: 100%;
+    padding: 12px 14px;
+    background: transparent;
+    color: #263A2B;
+    border: none;
+    border-bottom: none;
+    border-radius: 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.menu-logout:hover {
+    background: #E3EBDD;
+    color: #263A2B;
+    opacity: 1;
+    box-shadow: none;
+}
+
+/* Inner page navbar */
+
+.inner-page-header {
+    position: relative;
+    justify-content: center;
+}
+
+.inner-page-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #263A2B;
+    text-decoration: none;
+}
+
+.inner-page-brand:hover {
+    text-decoration: none;
+    color: #496A52;
+}
+
+.navbar-back-button {
+    margin-right: auto;
+    padding: 8px 0;
+    background: transparent;
+    color: #496A52;
+    border: none;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.navbar-back-button:hover {
+    background: transparent;
+    color: #263A2B;
+    box-shadow: none;
+}

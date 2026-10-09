@@ -38,14 +38,14 @@ function Navbar({ pageTitle, onBack }) {
                     </button>  
                 ) : (
                     <Link to="/" className="brand">
-                        <span className="brand-icon"span>✦</span>
+                        <span className="brand-icon">✦</span>
                         <span className="brand-name">The Akashic Herbalist</span>
                     </Link>
                 )}
 
                 {pageTitle && (
                     <Link to="/" className="inner-page-brand">
-                        <span className="brand-icon"span>✦</span>
+                        <span className="brand-icon">✦</span>
                         <span className="brand-name">The Akashic Herbalist</span>
                     </Link>
                 )}

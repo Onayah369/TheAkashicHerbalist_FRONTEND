@@ -10,6 +10,12 @@ Users can browse and search herbs, filter results by traditional usage and geogr
 
 The frontend communicates with a RESTful Express backend and provides a responsive interface built around a botanical and ethereal visual design.
 
+## Live Demo
+
+* **Live Application:** https://theakashicherbalist-frontend.onrender.com
+* **Backend API:** https://theakashicherbalist-backend.onrender.com
+
+
 ## Getting Started
 
 ### Dependencies

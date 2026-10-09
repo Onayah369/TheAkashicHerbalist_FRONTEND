@@ -50,7 +50,7 @@ The frontend runs using the Vite development server.
 The application communicates with the backend API at:
 
 ```
-http://localhost:8888
+https://theakashicherbalist-backend.onrender.com
 ```
 
 Make sure the backend server is running before using features that require API data.

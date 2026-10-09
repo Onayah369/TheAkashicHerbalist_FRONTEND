@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8888/api/auth";
+const API_URL = "https://theakashicherbalist-backend.onrender.com/api/auth";
 
 export const registerUser = async (username, email, password) => {
     const response = await fetch(`${API_URL}/register`, {

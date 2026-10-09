@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8888/api/herbs";
+const API_URL = "https://theakashicherbalist-backend.onrender.com/api/herbs";
 
 export const getHerbs = async (
     search = "", 

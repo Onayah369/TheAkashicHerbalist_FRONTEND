@@ -19,7 +19,7 @@ function Journal() {
         const loadJournal = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8888/api/journal",
+                    "https://theakashicherbalist-backend.onrender.com/api/journal",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ function Journal() {
                 setEntries(data.entries);
 
                 const herbResponse = await fetch(
-                    "http://localhost:8888/api/herbs"
+                    "https://theakashicherbalist-backend.onrender.com/api/herbs"
                 );
 
                 const herbData = await herbResponse.json();
@@ -75,8 +75,8 @@ function Journal() {
         setMessage("");
 
         const url = editingId
-            ? `http://localhost:8888/api/journal/${editingId}`
-            : "http://localhost:8888/api/journal";
+            ? `https://theakashicherbalist-backend.onrender.com/api/journal/${editingId}`
+            : "https://theakashicherbalist-backend.onrender.com/api/journal";
 
         const method = editingId ? "PUT" : "POST";
 
@@ -134,7 +134,7 @@ function Journal() {
     const handleDelete = async (entryId) => {
         try {
             const response = await fetch(
-                `http://localhost:8888/api/journal/${entryId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/journal/${entryId}`,
                 {
                     method: "DELETE",
                     headers: {

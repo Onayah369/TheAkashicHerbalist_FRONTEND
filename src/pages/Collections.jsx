@@ -18,7 +18,7 @@ function Collections() {
         const getCollections = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8888/api/collections",
+                    "https://theakashicherbalist-backend.onrender.com/api/collections",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ function Collections() {
                 setCollections(data.collections);
 
                 const herbResponse = await fetch(
-                    "http://localhost:8888/api/herbs"
+                    "https://theakashicherbalist-backend.onrender.com/api/herbs"
                 );
 
                 const herbData = await herbResponse.json();
@@ -65,7 +65,7 @@ function Collections() {
 
         try {
             const response = await fetch(
-                "http://localhost:8888/api/collections",
+                "https://theakashicherbalist-backend.onrender.com/api/collections",
                 {
                     method: "POST",
                     headers: {
@@ -105,7 +105,7 @@ function Collections() {
 
         try {
             const response = await fetch(
-                `http://localhost:8888/api/collections/${collectionId}/herbs/${herbId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/collections/${collectionId}/herbs/${herbId}`,
                 {
                     method: "POST",
                     headers: {
@@ -143,7 +143,7 @@ function Collections() {
     const handleRemoveHerb = async (collectionId, herbId) => {
         try {
             const response = await fetch(
-                `http://localhost:8888/api/collections/${collectionId}/herbs/${herbId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/collections/${collectionId}/herbs/${herbId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -177,7 +177,7 @@ function Collections() {
     const handleDeleteCollection = async (collectionId) => {
         try {
             const response = await fetch(
-                `http://localhost:8888/api/collections/${collectionId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/collections/${collectionId}`,
                 {
                     method: "DELETE",
                     headers: {

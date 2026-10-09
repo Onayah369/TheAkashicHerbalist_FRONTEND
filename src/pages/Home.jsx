@@ -33,7 +33,7 @@ function Home() {
 
         try {
             const response = await fetch(
-                `http://localhost:8888/api/favorites/${herbId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/favorites/${herbId}`,
                 {
                     method: isFavorite ? "DELETE" : "POST",
                     headers: {
@@ -89,7 +89,7 @@ function Home() {
         const getFavorites = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8888/api/favorites",
+                    "https://theakashicherbalist-backend.onrender.com/api/favorites",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

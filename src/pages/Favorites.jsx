@@ -16,7 +16,7 @@ function Favorites() {
         const getFavorites = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8888/api/favorites",
+                    "https://theakashicherbalist-backend.onrender.com/api/favorites",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ function Favorites() {
     const removeFavorite = async (herbId) => {
         try {
             const response = await fetch(
-                `http://localhost:8888/api/favorites/${herbId}`,
+                `https://theakashicherbalist-backend.onrender.com/api/favorites/${herbId}`,
                         {
                             method: "DELETE",
                             headers: {

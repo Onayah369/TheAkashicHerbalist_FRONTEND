@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 function Register() {
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -47,12 +49,14 @@ function Register() {
                 throw new Error(data.message || "Registration failed");
             }
 
+            login(data.user, data.token);
+
             setSuccess("Account created successfully!");
 
             setTimeout(() => {
-                navigate("/login");
+                navigate("/");
             },  1000);
-        } catch (err) {
+        } catch (error){
             setError(error.message);
         } finally {
             setLoading(false);

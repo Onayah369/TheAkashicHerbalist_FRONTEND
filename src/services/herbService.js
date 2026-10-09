@@ -4,7 +4,8 @@ export const getHerbs = async (
     search = "", 
     sort = "",
     usage = "",
-    continent = ""
+    continent = "",
+    country = ""
 ) => {
     const params = new URLSearchParams();
     if (search) {
@@ -18,6 +19,9 @@ export const getHerbs = async (
     }
     if (continent) {
         params.append("continent", continent)
+    }
+    if (country) {
+        params.append("country", country);
     }
 
     const queryString = params.toString();

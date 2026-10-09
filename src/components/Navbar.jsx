@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
-function Navbar({ pageTitle }) {
+function Navbar({ pageTitle, onBack }) {
     const { user, token, logout } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -14,7 +14,11 @@ function Navbar({ pageTitle }) {
     };
 
     const handleBack = () => {
-        navigate("/");
+        if (onBack) {
+            onBack();
+        } else {
+            navigate("/");
+        }
         setMenuOpen(false);
     };
 
@@ -34,23 +38,26 @@ function Navbar({ pageTitle }) {
                     </button>  
                 ) : (
                     <Link to="/" className="brand">
-                        <span className="brand-icon">✦</span>
+                        <span className="brand-icon"span>✦</span>
                         <span className="brand-name">The Akashic Herbalist</span>
                     </Link>
                 )}
 
                 {pageTitle && (
                     <Link to="/" className="inner-page-brand">
+                        <span className="brand-icon"span>✦</span>
                         <span className="brand-name">The Akashic Herbalist</span>
                     </Link>
                 )}
                 
 
                 <nav className="nav">
-                    {!pageTitle && <Link to="/">Browse</Link>}
 
                     {!token ? (
                         <>
+                            <Link to="/login" className="nav-button">
+                                Login
+                            </Link>
                             <Link to="/register" className="nav-button">
                             Create Account</Link>
                         </>
@@ -60,14 +67,7 @@ function Navbar({ pageTitle }) {
                             className="nav-profile"
                             aria-label="View profile"
                         >
-                            {user?.profilePicture ? (
-                                <img
-                                    src={user.profilePicture}
-                                    alt={user.username}
-                                />
-                            ) : (
-                                <span>{userInitial}</span>
-                            )}
+                            <span>{userInitial}</span>
                         </Link>
                     )}
 

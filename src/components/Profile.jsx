@@ -7,7 +7,6 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
     const [bio, setBio] = useState("");
-    const [profilePicture, setProfilePicture] = useState("");
     const [message, setMessage] = useState("");
 
     useEffect(() => {
@@ -25,7 +24,6 @@ const Profile = () => {
 
                 setProfile(data.user);
                 setBio(data.user.bio || "");
-                setProfilePicture(data.user.profilePicture || "");
             } catch (error) {
                 setError(error.message);
             }
@@ -51,7 +49,6 @@ const Profile = () => {
                 },
                 body: JSON.stringify({
                     bio,
-                    profilePicture,
                 }),
             });
 
@@ -85,12 +82,6 @@ const Profile = () => {
             <p>Bio: {profile.bio || "No bio yet."}</p>
 
             <form onSubmit={handleUpdate}>
-                <input
-                    type="text"
-                    placeholder="Profile picture URL"
-                    value={profilePicture}
-                    onChange={(event) => setProfilePicture(event.target.value)}
-                />
 
                 <textarea
                     placeholder="Tell us about yourself"

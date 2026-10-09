@@ -10,7 +10,6 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
     const [bio, setBio] = useState("");
-    const [profilePicture, setProfilePicture] = useState("");
     const [message, setMessage] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -30,7 +29,6 @@ const Profile = () => {
 
                 setProfile(data.user);
                 setBio(data.user.bio || "");
-                setProfilePicture(data.user.profilePicture || "");
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -60,7 +58,6 @@ const Profile = () => {
                 },
                 body: JSON.stringify({
                     bio,
-                    profilePicture,
                 }),
             });
 
@@ -72,7 +69,6 @@ const Profile = () => {
 
             setProfile(data.user);
             setBio(data.user.bio || "");
-            setProfilePicture(data.user.profilePicture || "");
             setMessage("Profile updated successfully.");
             setIsEditing(false);
         } catch (error) {
@@ -147,16 +143,9 @@ const Profile = () => {
                         </div>
 
                         <div className="profile-avatar">
-                            {profile.profilePicture ? (
-                                <img
-                                    src={profile.profilePicture}
-                                    alt={`${profile.username}'s profile`}
-                                />
-                            ) : (
                                 <span>
                                     {profile.username ?.charAt(0).toUpperCase()}
                                 </span>
-                            )}
                         </div>
                     
                     {!isEditing ? (
@@ -181,7 +170,6 @@ const Profile = () => {
                                 className="profile-primary-button"
                                 onClick={() => {
                                     setBio(profile.bio || "");
-                                    setProfilePicture(profile.profilePicture || "");
                                     setMessage("");
                                     setIsEditing(true);
                                 }}
@@ -194,18 +182,6 @@ const Profile = () => {
                             className="profile-form"
                             onSubmit={handleUpdate}
                         >
-                            <div className="profile-form-group">
-                                <label htmlFor="profilePicture">
-                                    Profile Picture URL
-                                </label>
-                                <input
-                                    id="profilePicture"
-                                    type="url"
-                                    placeholder="Profile picture URL"
-                                    value={profilePicture}
-                                    onChange={(event) => setProfilePicture(event.target.value)}
-                                />
-                            </div>
 
                             <div className="profile-form-group">
                                 <label htmlFor="bio">Bio</label>
@@ -234,7 +210,6 @@ const Profile = () => {
                                     className="profile-secondary-button"
                                     onClick={() => {
                                         setBio(profile.bio || "");
-                                        setProfilePicture(profile.profilePicture || "");
                                         setError("");
                                         setIsEditing(false);
                                     }}
